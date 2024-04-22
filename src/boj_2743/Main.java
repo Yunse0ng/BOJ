@@ -9,7 +9,5 @@ public class Main {
 
         String n = scanner.nextLine();
         System.out.println(n.length());
-
-        scanner.close();
     }
 }
