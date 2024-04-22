@@ -1,8 +1,6 @@
 package boj_2741
 
-import java.util.*
-
-fun main() = with(Scanner(System.`in`)) {
-    for(i in 1..nextInt())
+fun main() {
+    for(i in 1..readln().toInt())
         println(i)
 }
