@@ -5,7 +5,8 @@ fun main() {
     val b = readln().toInt()
     println(
         if (a in 20..23)
-                "${24 - a + b}"
-        else "${b - a}"
+            "${24 - a + b}"
+        else
+            "${b - a}"
     )
 }
