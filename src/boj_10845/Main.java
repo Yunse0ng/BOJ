@@ -1,48 +1,93 @@
 package boj_10845;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<Integer> arr = new ArrayList<>();
+    static int[] que = new int[10001];
 
-        int a = scanner.nextInt();
+    static int first = 0;
+    static int last = 0;
 
-        for (int i = 0; i < a; i++) {
-            String cmd = scanner.next();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
-            if (cmd.contains("push")) {
-                arr.add(scanner.nextInt());
-            }
+        int N = Integer.parseInt(br.readLine());
 
-            if (cmd.contains("pop")) {
-                if (arr.isEmpty()) System.out.println(-1);
-                else {
-                    System.out.println(arr.getFirst());
-                    arr.removeFirst();
-                }
-            }
+        for (int i = 0; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            String S = st.nextToken();
 
-            if (cmd.contains("size")) {
-                System.out.println(arr.size());
-            }
-
-            if (cmd.contains("empty")) {
-                if (arr.isEmpty()) System.out.println(1);
-                else System.out.println(0);
-            }
-
-            if (cmd.contains("front")) {
-                if (arr.isEmpty()) System.out.println(-1);
-                else System.out.println(arr.getFirst());
-            }
-
-            if (cmd.contains("back")) {
-                if (arr.isEmpty()) System.out.println(-1);
-                else System.out.println(arr.getLast());
+            switch (S) {
+                case "push":
+                    push(Integer.parseInt(st.nextToken()));
+                    break;
+                case "pop":
+                    sb.append(pop()).append("\n");
+                    break;
+                case "size":
+                    sb.append(size()).append("\n");
+                    break;
+                case "empty":
+                    sb.append(empty()).append("\n");
+                    break;
+                case "front":
+                    sb.append(front()).append("\n");
+                    break;
+                case "back":
+                    sb.append(back()).append("\n");
+                    break;
             }
         }
+        System.out.println(sb);
     }
+
+    public static void push(int X) {
+        que[last] = X;
+        last++;
+    }
+
+    public static int pop() {
+        if (last - first == 0) {
+            return -1;
+        } else {
+            int P = que[first];
+            first++;
+            return P;
+        }
+    }
+
+    public static int size() {
+        return last - first;
+    }
+
+    public static int empty() {
+        if (last - first == 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public static int front() {
+        if (last - first == 0) {
+            return -1;
+        } else {
+            int F = que[first];
+            return F;
+        }
+    }
+
+    public static int back() {
+        if (last - first == 0) {
+            return -1;
+        } else {
+            int B = que[last - 1];
+            return B;
+        }
+    }
+
 }
